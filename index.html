@@ -1,17 +1,10 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#1C5965">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>قصتي الصحية</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@500;600;700&display=swap">
 <style>
-:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
-
 /* Layout: a patient's carnet de santé — identity card on top, the health story as a dated spine, sections in a tab bar (bottom on phones). */
 :root{
   --paper:#F2F6F5; --card:#FFFFFF; --ink:#13303A; --muted:#5A6F77; --line:#D3DFDD;
@@ -169,6 +162,27 @@ textarea{resize:vertical}
 .bar{height:6px;border-radius:9px;background:var(--line);overflow:hidden}
 .bar i{display:block;height:100%;background:var(--good);border-radius:9px}
 .med-f{display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:10px}
+.mphoto{position:relative;display:block;width:100%;height:170px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:0;overflow:hidden}
+.mphoto img{width:100%;height:100%;object-fit:contain;display:block}
+.mphoto .zoom{position:absolute;inset-inline-start:8px;bottom:8px;background:rgba(19,48,58,.72);color:#fff;border-radius:7px;padding:2px 9px;font-size:.78rem}
+.mphoto-add{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;height:110px;border:1.5px dashed var(--line);border-radius:10px;background:var(--paper);color:var(--primary);font-weight:500;font-size:.9rem}
+.mphoto-add:hover{border-color:var(--primary)}
+.slot{grid-template-columns:auto auto minmax(0,1fr) auto}
+@media (max-width:560px){.slot{grid-template-columns:auto auto minmax(0,1fr)}.slot .sb{grid-column:1/-1;justify-content:flex-start}}
+.sthumb{width:46px;height:46px;border-radius:8px;border:1px solid var(--line);background:#fff;padding:0;overflow:hidden;flex:none;display:grid;place-items:center;color:var(--primary)}
+.sthumb img{width:100%;height:100%;object-fit:contain}
+.sthumb.none{background:var(--primary-soft);border-color:transparent}
+.lb{flex:1 1 100%;display:flex;flex-direction:column;gap:10px;align-items:center}
+.lb img{width:100%;max-height:62vh;object-fit:contain;background:#fff;border-radius:12px;border:1px solid var(--line)}
+.pick{flex:1 1 100%;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pick label{display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid var(--line);border-radius:12px;padding:18px 8px;cursor:pointer;font-weight:500;text-align:center}
+.pick label:hover{border-color:var(--primary);background:var(--primary-soft)}
+.pick svg{width:30px;height:30px;color:var(--primary)}
+.cur-ph{flex:1 1 100%;display:flex;gap:10px;align-items:center}
+.cur-ph img{width:64px;height:64px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:8px}
+.sos-meds{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.sos-meds li{display:flex;gap:10px;align-items:center}
+.sos-meds img{width:48px;height:48px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:8px;flex:none}
 .side{font-size:.86rem;background:var(--paper);border-radius:8px;padding:6px 10px}
 
 /* measures */
@@ -227,8 +241,6 @@ textarea{resize:vertical}
 .toast button{background:none;border:1px solid currentColor;color:inherit;border-radius:7px;padding:2px 10px}
 @media (prefers-reduced-motion:no-preference){.sheet-card{animation:up .18s ease-out}@keyframes up{from{transform:translateY(16px);opacity:.6}}}
 </style>
-</head>
-<body>
 
 <div class="app" dir="rtl" lang="ar">
   <header class="top">
@@ -277,6 +289,8 @@ const ICON={
  family:'<circle cx="8" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M2 20c.6-3.3 3-5 6-5s5.4 1.7 6 5M14.5 15.3c.8-.3 1.6-.4 2.5-.4 2.5 0 4.4 1.5 5 4"/>',
  info:'<circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v5h1"/>',
  alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/>',
+ camera:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+ gallery:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>',
  pill:'<rect x="3" y="9" width="18" height="7" rx="3.5" transform="rotate(-35 12 12.5)"/><path d="M9.2 8.6l5.6 7.8"/>'
 };
 const ic=(k,s=18)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg>`;
@@ -294,11 +308,13 @@ const MT={
 const LEVEL=[['','—'],['مزيان','مزيان'],['عادي','عادي'],['ضعيف','ضعيف']];
 
 /* ---------- sample data ---------- */
+/* صور توضيحية لعلب افتراضية (ماشي علب حقيقية) */
+function demoBox(name,sub,c1,c2){const sv=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260"><rect width="400" height="260" fill="#eef2f1"/><polygon points="60,70 300,70 350,40 110,40" fill="${c2}" opacity=".85"/><polygon points="300,70 350,40 350,200 300,230" fill="${c1}" opacity=".7"/><rect x="60" y="70" width="240" height="160" fill="#fff" stroke="#c9d5d3"/><rect x="60" y="70" width="240" height="44" fill="${c1}"/><rect x="60" y="200" width="240" height="30" fill="${c2}"/><text x="180" y="99" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">${name}</text><text x="180" y="150" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="${c1}" text-anchor="middle">${sub}</text><text x="180" y="178" font-family="Arial,sans-serif" font-size="13" fill="#5a6f77" text-anchor="middle">30 comprimés · exemple</text></svg>`;return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(sv)}
 function seed(){
  const T=today(),D=n=>addDays(T,n);let r=7;const rnd=()=>(r=(r*9301+49297)%233280)/233280;
  const meds=[
-  {id:uid(),name:'ميتفورمين 500 ملغ',dose:'قرص واحد مع الماكلة',times:['08:00','20:00'],start:D(-240),end:'',notes:'كما في وصفة د. مثال',photo:'',log:{},side:[{date:D(-232),text:'اضطراب خفيف في المعدة الأيام الأولى'}],stock:10,perDose:1,lowDays:7},
-  {id:uid(),name:'أملوديبين 5 ملغ',dose:'قرص واحد',times:['08:00'],start:D(-180),end:'',notes:'',photo:'',log:{},side:[],stock:24,perDose:1,lowDays:7},
+  {id:uid(),name:'ميتفورمين 500 ملغ',dose:'قرص واحد مع الماكلة',times:['08:00','20:00'],start:D(-240),end:'',notes:'كما في وصفة د. مثال',photo:demoBox('METFORMINE','500 mg','#2a6f97','#9cc5dd'),log:{},side:[{date:D(-232),text:'اضطراب خفيف في المعدة الأيام الأولى'}],stock:10,perDose:1,lowDays:7},
+  {id:uid(),name:'أملوديبين 5 ملغ',dose:'قرص واحد',times:['08:00'],start:D(-180),end:'',notes:'',photo:demoBox('AMLODIPINE','5 mg','#b5532b','#f0c2a8'),log:{},side:[],stock:24,perDose:1,lowDays:7},
   {id:uid(),name:'فيتامين D (أمبولة)',dose:'أمبولة وحدة فالسيمانة',times:['12:00'],start:D(-90),end:D(-30),notes:'',photo:'',log:{},side:[],stock:null,perDose:1,lowDays:7}
  ];
  for(let i=14;i>=1;i--){const d=D(-i);meds.slice(0,2).forEach(m=>m.times.forEach(t=>{const x=rnd();m.log[d+'|'+t]=x<.88?'taken':(x<.94?'skipped':undefined);if(!m.log[d+'|'+t])delete m.log[d+'|'+t]}))}
@@ -341,7 +357,7 @@ function seed(){
 function seed2(){
  const T=today(),D=n=>addDays(T,n),P=blank();
  P.rel='الأم';Object.assign(P.profile,{name:'مريضة تجريبية',age:63,blood:'A+',chronic:[{id:uid(),name:'قصور الغدة الدرقية',date:D(-400)}],doctor:{name:'د. مثال 2',specialty:'الغدد',phone:'0600-111111'}});
- const m={id:uid(),name:'ليفوتيروكس 50 ميكروغرام',dose:'قرص واحد قبل الفطور بنص ساعة',times:['07:00'],start:D(-400),end:'',notes:'',photo:'',log:{},side:[],stock:4,perDose:1,lowDays:7};
+ const m={id:uid(),name:'ليفوتيروكس 50 ميكروغرام',dose:'قرص واحد قبل الفطور بنص ساعة',times:['07:00'],start:D(-400),end:'',notes:'',photo:demoBox('LÉVOTHYROXINE','50 µg','#4f7a3a','#bcd7a9'),log:{},side:[],stock:4,perDose:1,lowDays:7};
  for(let i=10;i>=1;i--)m.log[D(-i)+'|07:00']='taken';P.meds.push(m);
  P.docs.push({id:uid(),type:'appointment',title:'موعد عند طبيب الغدد',date:D(20),note:'',file:'',fileName:''});
  P.family={name:'مثال: الابن',relation:'ابن',phone:'',shares:{profile:true,meds:true,measures:false,docs:true},notifyMissed:true};
@@ -467,6 +483,7 @@ function vMeds(){
  ${late.length&&f.notifyMissed&&f.name?`<div class="note alert">${ic('alert')}<div><b>${late.length} جرعة فات وقتها وما تسجلاتش.</b> التنبيه للعائلة مفعّل لـ${esc(f.name)}. <button class="btn sm" data-act="family-msg">رسالة جاهزة للعائلة</button></div></div>`:''}
  <div class="sec-h"><div><h2>جدول اليوم</h2><small class="muted">التذكير كيبان هنا ملي يكون التطبيق مفتوح فوقت الجرعة.</small></div></div>
  <div class="slots">${ts.length?ts.map(s=>`<div class="slot ${s.st==='taken'?'taken':''} ${s.late?'late':''}">
+   ${s.m.photo?`<button class="sthumb" data-act="ph-view" data-id="${s.m.id}" aria-label="صورة علبة ${esc(s.m.name)}"><img src="${s.m.photo}" alt=""></button>`:`<button class="sthumb none" data-act="ph-pick" data-id="${s.m.id}" aria-label="زيد صورة العلبة">${ic('camera',20)}</button>`}
    <span class="time num">${s.t}</span>
    <div class="who"><b>${esc(s.m.name)}</b><small>${esc(s.m.dose)}${s.st==='taken'?' · تاخدات':s.st==='skipped'?' · ما تاخداتش':s.late?' · فات الوقت':''}</small></div>
    <div class="sb">${s.st?`<button class="btn sm ghost" data-act="dose" data-id="${s.m.id}" data-t="${s.t}" data-st="">تراجع</button>`:`<button class="btn sm pri" data-act="dose" data-id="${s.m.id}" data-t="${s.t}" data-st="taken">خذيتها</button><button class="btn sm" data-act="dose" data-id="${s.m.id}" data-t="${s.t}" data-st="skipped">ما خذيتهاش</button>`}</div>
@@ -479,8 +496,8 @@ function medCard(m){
  const a=adherence(m,addDays(today(),-13),today()),dl=daysLeft(m),low=dl!=null&&dl<=m.lowDays&&active(m,today());
  const stock=m.stock==null?`<div class="side">المخزون ما تسجلش. <button class="btn sm ghost" data-act="refill" data-id="${m.id}">سجّل شحال باقي</button></div>`
   :`<div class="side" style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span>المخزون: <b class="num">${m.stock}</b> وحدة · ${active(m,today())?`كيكفي <b>${daysTxt(dl)}</b>`:'الدواء ما خدامش دابا'} ${low?'<span class="tag warn">قرب يسالي</span>':''}</span><button class="btn sm" data-act="refill" data-id="${m.id}">+ علبة جديدة</button></div>`;
- return `<article class="card med"><div class="med-h"><div class="med-ph">${m.photo?`<img src="${m.photo}" alt="علبة ${esc(m.name)}">`:ic('pill',26)}</div>
-  <div style="min-width:0"><h3>${esc(m.name)}</h3><small class="muted">${esc(m.dose)}</small></div></div>
+ return `<article class="card med">${m.photo?`<button class="mphoto" data-act="ph-view" data-id="${m.id}" aria-label="كبّر صورة علبة ${esc(m.name)}"><img src="${m.photo}" alt="علبة ${esc(m.name)}" loading="lazy"><span class="zoom">كبّر</span></button>`:`<button class="mphoto-add" data-act="ph-pick" data-id="${m.id}">${ic('camera',26)}<span>زيد صورة العلبة</span><small class="muted">باش تعرفها بسهولة</small></button>`}
+  <div style="min-width:0"><h3>${esc(m.name)}</h3><small class="muted">${esc(m.dose)}</small></div>
   <dl class="kv"><dt>التوقيت</dt><dd class="num" style="text-align:right">${m.times.join(' · ')}</dd>
    <dt>المدة</dt><dd>${fmt(m.start)} ← ${m.end?fmt(m.end):'مستمر'}</dd>${m.notes?`<dt>ملاحظة</dt><dd>${esc(m.notes)}</dd>`:''}</dl>
   ${a.pct!=null?`<div><small class="muted">الالتزام فآخر 14 يوم: <b class="num">${a.pct}%</b> (${a.tk} من ${a.exp})</small><div class="bar"><i style="width:${a.pct}%"></i></div></div>`:''}
@@ -605,7 +622,7 @@ function openForm(title,fields,data,onSave,extraFoot=''){
   const r=onSave(out);if(r===false)return;save();closeSheet();render()};
  function err(m){const e=$('#ferr');e.textContent=m;e.hidden=false;return false}
 }
-function readFile(file,maxW){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>{if(!file.type.startsWith('image/'))return res(r.result);const img=new Image();img.onload=()=>{const sc=Math.min(1,maxW/img.width),c=document.createElement('canvas');c.width=Math.round(img.width*sc);c.height=Math.round(img.height*sc);c.getContext('2d').drawImage(img,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.8))};img.onerror=()=>res(r.result);img.src=r.result};r.onerror=rej;r.readAsDataURL(file)})}
+function readFile(file,maxW){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>{if(!file.type.startsWith('image/'))return res(r.result);const img=new Image();img.onload=()=>{const sc=Math.min(1,maxW/img.width),c=document.createElement('canvas');c.width=Math.round(img.width*sc);c.height=Math.round(img.height*sc);c.getContext('2d').drawImage(img,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.78))};img.onerror=()=>res(r.result);img.src=r.result};r.onerror=rej;r.readAsDataURL(file)})}
 
 /* ---------- forms ---------- */
 const TIME_RE=/^([01]?\d|2[0-3]):[0-5]\d$/;
@@ -620,7 +637,7 @@ function medForm(m){
   {id:'stock',label:'شحال باقي عندك',type:'number',half:1,ph:'مثلا 30',hint:'عدد الأقراص ولا الوحدات'},
   {id:'perDose',label:'شحال فكل جرعة',type:'number',step:'0.5',half:1,def:1,hint:'كيتنقص من المخزون ملي كتسجل الجرعة'},
   {id:'lowDays',label:'نبّهني قبل ما يسالي ب (أيام)',type:'number',def:7},
-  {id:'photo',label:'صورة العلبة',type:'file',accept:'image/*',maxW:500}
+  {id:'photo',label:m&&m.photo?'بدّل صورة العلبة':'صورة العلبة',type:'file',accept:'image/*',maxW:900,hint:'صوّر الوجه اللي فيه السمية والجرعة. فالتيليفون كتقدر تختار الكاميرا ولا الصور.'}
  ],m?{...m,times:m.times.join(', ')}:null,o=>{
   const times=o.times.split(/[,،\s]+/).filter(Boolean).map(t=>t.length===4?'0'+t:t);
   if(!times.every(t=>TIME_RE.test(t))){const e=$('#ferr');e.textContent='الأوقات خاصها تكون بحال 08:00 ولا 20:30.';e.hidden=false;return false}
@@ -738,7 +755,7 @@ function openSOS(){
   <div class="sos-top"><div><h3>${esc(p.name||'الاسم ما تسجلش')}</h3><small class="muted">${p.age?esc(p.age)+' عام':''}</small></div><div class="sos-blood">${esc(p.blood||'؟')}<small>فصيلة الدم</small></div></div>
   <div class="sos-sec"><h4>حساسية من الأدوية</h4>${p.allergies.length?`<div class="sos-al">${p.allergies.map(a=>`<span>${esc(a.name)}</span>`).join('')}</div>`:'<span>ما كاينة حتى حساسية مسجلة</span>'}</div>
   <div class="sos-sec"><h4>الأمراض المزمنة</h4>${esc(p.chronic.map(c=>c.name).join('، ')||'ما كاين والو مسجل')}</div>
-  <div class="sos-sec"><h4>الأدوية الحالية</h4>${meds.length?`<ul style="margin:0;padding-inline-start:18px">${meds.map(m=>`<li><b>${esc(m.name)}</b> — ${esc(m.dose)}</li>`).join('')}</ul>`:'ما كاين حتى دواء'}</div>
+  <div class="sos-sec"><h4>الأدوية الحالية</h4>${meds.length?`<ul class="sos-meds">${meds.map(m=>`<li>${m.photo?`<img src="${m.photo}" alt="">`:''}<span><b>${esc(m.name)}</b> — ${esc(m.dose)}</span></li>`).join('')}</ul>`:'ما كاين حتى دواء'}</div>
   <div class="sos-sec"><h4>للاتصال</h4>
    ${f.name?`<div class="contact"><span>${esc(f.name)}${f.relation?` <small class="muted">${esc(f.relation)}</small>`:''}</span><span class="num">${esc(f.phone||'—')}</span></div>`:'<p class="muted" style="margin:0 0 6px">زيد شخص موثوق من قسم العائلة.</p>'}
    ${p.doctor.name?`<div class="contact"><span>${esc(p.doctor.name)} <small class="muted">الطبيب</small></span><span class="num">${esc(p.doctor.phone||'—')}</span></div>`:''}</div>
@@ -790,6 +807,9 @@ document.addEventListener('click',e=>{
   case 'q-answer':{const q=S.questions.find(x=>x.id===id);openForm('جواب الطبيب',[{id:'answer',label:'شنو قال الطبيب',type:'textarea',req:1},{id:'answeredOn',label:'التاريخ',type:'date',req:1,def:today()}],null,o=>{Object.assign(q,o,{done:true});toast('تسجل الجواب فالقصة الصحية')},`<small class="muted" style="flex:1 1 100%">السؤال: ${esc(q.text)}</small>`);break}
   case 'q-del':confirmBtn(b,a+id,()=>{S.questions=S.questions.filter(q=>q.id!==id);save();render()});break;
   case 'med-add':medForm();break;
+  case 'ph-view':{const m=med();openSheet(m.name,`<div class="lb"><img src="${m.photo}" alt="علبة ${esc(m.name)}"><small class="muted">${esc(m.dose)} · ${m.times.join(' · ')}</small></div>`,`<button class="btn" data-act="ph-pick" data-id="${m.id}">بدّل الصورة</button><button class="btn ghost danger" data-act="ph-del" data-id="${m.id}">حيد الصورة</button><button class="btn" data-act="close">سد</button>`);break}
+  case 'ph-pick':{const m=med();openSheet('صورة العلبة: '+m.name,`<div class="pick"><label>${ic('camera')}<span>صوّر دابا</span><input type="file" accept="image/*" capture="environment" data-ph="${m.id}" hidden></label><label>${ic('gallery')}<span>اختار من الصور</span><input type="file" accept="image/*" data-ph="${m.id}" hidden></label></div><small class="muted" style="flex:1 1 100%">صوّر الوجه ديال العلبة اللي فيه السمية والجرعة، فبلاصة فيها الضو.</small>`,'<button class="btn" data-act="close">إلغاء</button>');break}
+  case 'ph-del':confirmBtn(b,a+id,()=>{med().photo='';save();closeSheet();render();toast('تحيدات الصورة')});break;
   case 'med-edit':medForm(med());break;
   case 'med-del':confirmBtn(b,a+id,()=>{S.meds=S.meds.filter(m=>m.id!==id);save();render()});break;
   case 'side-add':{const m=med();openForm('عرض جانبي: '+m.name,[{id:'date',label:'التاريخ',type:'date',req:1,def:today()},{id:'text',label:'شنو لاحظتي',type:'textarea',req:1}],null,o=>{(m.side=m.side||[]).push(o)},`<small class="muted" style="flex:1 1 100%">التسجيل للمتابعة مع الطبيب. ما توقفش الدواء بلا ما تشاور معاه.</small>`);break}
@@ -825,6 +845,8 @@ document.addEventListener('change',e=>{
  const t=e.target;
  if(t.dataset.act==='share'){S.family.shares[t.dataset.k]=t.checked;save()}
  if(t.dataset.act==='notify'){S.family.notifyMissed=t.checked;save()}
+ if(t.dataset.ph&&t.files[0]){const m=S.meds.find(x=>x.id===t.dataset.ph),f=t.files[0];if(!m)return;if(!f.type.startsWith('image/')){toast('اختار صورة');return}
+  readFile(f,900).then(u=>{m.photo=u;save();closeSheet();render();toast('تزادت صورة العلبة')}).catch(()=>toast('الصورة ما تقراتش، جرب مرة أخرى'))}
  if(t.id==='importFile'&&t.files[0]){const r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(d.persons&&Object.keys(d.persons).length){}else if(d.profile&&Array.isArray(d.meds))d=wrapOld(d);else throw 0;
    pendingImport=d;const names=Object.values(d.persons).map(P=>P.profile?.name||'بلا اسم');
    openSheet('استرجاع نسخة',`<p style="margin:0;flex:1 1 100%">هاد النسخة ${d.exportedAt?`تحملات نهار <b>${fmt(iso(new Date(d.exportedAt)))}</b>`:'ما فيهاش تاريخ'} وفيها: <b>${names.map(esc).join('، ')}</b>.</p>
@@ -845,5 +867,4 @@ setInterval(()=>{const n=nowHM();Object.entries(DB.persons).forEach(([pid,P])=>t
 render();
 </script>
 
-</body>
-</html>
+</body></html>
